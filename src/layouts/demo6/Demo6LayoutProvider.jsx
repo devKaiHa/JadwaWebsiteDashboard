@@ -33,7 +33,7 @@ const Demo6LayoutProvider = ({ children }) => {
   // Merge the Demo6 layout configuration with the current layout configuration fetched via getLayout
   const layoutConfig = deepMerge(
     Demo6LayoutConfig,
-    getLayout(Demo6LayoutConfig.name)
+    getLayout(Demo6LayoutConfig.name),
   );
 
   // Set the initial state for layout and mobile sidebar

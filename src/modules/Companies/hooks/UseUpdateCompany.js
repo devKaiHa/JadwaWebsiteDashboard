@@ -208,7 +208,7 @@ const useUpdateCompany = () => {
     langs.forEach((lang) => {
       formData.append(
         `introduction[title][${lang}]`,
-        company.introduction.title[lang]
+        company.introduction.title[lang],
       );
     });
 

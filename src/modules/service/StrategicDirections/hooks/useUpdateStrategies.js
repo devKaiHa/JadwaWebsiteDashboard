@@ -80,7 +80,7 @@ export const useStrategicDirections = () => {
     for (const item of data.data) {
       if (!item.title.en || !item.title.ar || !item.title.tr) {
         toast.error(
-          "Please fill all translations for each item before saving."
+          "Please fill all translations for each item before saving.",
         );
         return;
       }

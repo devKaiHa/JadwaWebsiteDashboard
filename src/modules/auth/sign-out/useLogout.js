@@ -5,13 +5,13 @@ const useLogout = () => {
   const navigate = useNavigate();
 
   const logout = () => {
-    // Remove cookies set during login
+    // Remove Token cookies
     Cookies.remove("Token");
 
-    // Optionally clear state or localStorage if used
+    // Clear localStorage
     localStorage.clear();
 
-    // Redirect to login or home
+    // Redirect to login
     navigate("/auth/login");
   };
 

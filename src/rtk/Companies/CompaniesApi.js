@@ -1,42 +1,44 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import baseURL, { CompaniesEndPoint } from "../../Api/GlobalData";
-import Cookies from "js-cookie";
+import { CompaniesEP } from "../../Api/GlobalData";
+import { baseApi } from "../baseApi";
 
-// import Cookies from "js-cookie";
-const jwt = Cookies.get("Token");
-export const CompanyPageApi = createApi({
-  reducerPath: "CompanyPageApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseURL,
-    prepareHeaders: (headers) => {
-       if (jwt) headers.set("Authorization", `Bearer ${jwt}`);
-      return headers;
-    },
-  }),
-  tagTypes: ["Company"],
+export const companiesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllCompanies: builder.query({
-      query: (query) => `${CompaniesEndPoint}?${query}`,
+    getCompanies: builder.query({
+      query: ({ q, project, sector, status, published } = {}) => {
+        const params = new URLSearchParams();
+
+        if (q) params.append("q", q);
+        if (project) params.append("project", project);
+        if (sector) params.append("sector", sector);
+        if (status) params.append("status", status);
+
+        if (published !== undefined && published !== null && published !== "") {
+          params.append("published", String(published));
+        }
+
+        const queryString = params.toString();
+        return queryString ? `${CompaniesEP}?${queryString}` : CompaniesEP;
+      },
       providesTags: ["Company"],
     }),
 
-    getOneCompany: builder.query({
-      query: (id) => `${CompaniesEndPoint}/${id}`,
+    getCompanyById: builder.query({
+      query: (id) => `${CompaniesEP}/${id}`,
       providesTags: ["Company"],
     }),
 
-    postCompany: builder.mutation({
-      query: (formData) => ({
-        url: CompaniesEndPoint,
+    createCompany: builder.mutation({
+      query: (data) => ({
+        url: CompaniesEP,
         method: "POST",
-        body: formData,
+        body: data,
       }),
       invalidatesTags: ["Company"],
     }),
 
     updateCompany: builder.mutation({
       query: ({ id, data }) => ({
-        url: `${CompaniesEndPoint}/${id}`,
+        url: `${CompaniesEP}/${id}`,
         method: "PUT",
         body: data,
       }),
@@ -44,8 +46,8 @@ export const CompanyPageApi = createApi({
     }),
 
     deleteCompany: builder.mutation({
-      query: (deleteId) => ({
-        url: `${CompaniesEndPoint}/${deleteId}`,
+      query: (id) => ({
+        url: `${CompaniesEP}/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Company"],
@@ -54,9 +56,9 @@ export const CompanyPageApi = createApi({
 });
 
 export const {
-  useGetAllCompaniesQuery,
-  useGetOneCompanyQuery,
-  usePostCompanyMutation,
+  useGetCompaniesQuery,
+  useGetCompanyByIdQuery,
+  useCreateCompanyMutation,
   useUpdateCompanyMutation,
   useDeleteCompanyMutation,
-} = CompanyPageApi;
+} = companiesApi;

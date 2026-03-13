@@ -32,7 +32,13 @@ const SlideCard = ({
               placeholder={`Enter title in ${lang.toUpperCase()}`}
               value={slide.title[lang] || ""}
               onChange={(e) =>
-                handleSlideChange(companyIndex, slideIndex, "title", lang, e.target.value)
+                handleSlideChange(
+                  companyIndex,
+                  slideIndex,
+                  "title",
+                  lang,
+                  e.target.value,
+                )
               }
             />
           </div>
@@ -44,7 +50,13 @@ const SlideCard = ({
               placeholder={`Enter category in ${lang.toUpperCase()}`}
               value={slide.category[lang] || ""}
               onChange={(e) =>
-                handleSlideChange(companyIndex, slideIndex, "category", lang, e.target.value)
+                handleSlideChange(
+                  companyIndex,
+                  slideIndex,
+                  "category",
+                  lang,
+                  e.target.value,
+                )
               }
             />
           </div>
@@ -57,7 +69,9 @@ const SlideCard = ({
           type="file"
           accept="image/*"
           className="file-input w-full"
-          onChange={(e) => handleFileSelect(e.target.files[0], companyIndex, slideIndex)}
+          onChange={(e) =>
+            handleFileSelect(e.target.files[0], companyIndex, slideIndex)
+          }
         />
         {slide.preview && (
           <div className="flex flex-col gap-2 mt-2">

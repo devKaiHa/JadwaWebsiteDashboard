@@ -1,33 +1,45 @@
 import { useState } from "react";
-import { useLoginMutation } from "@/rtk/AuthApi/authApi";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router";
+import {
+  useLoginMutation,
+  useLogoutMutation,
+  useRefreshMutation,
+} from "../../../rtk/AuthApi/authApi";
 
 const useLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [logIn, { isLoading, error, data }] = useLoginMutation();
-  const navigate = useNavigate();
+
+  const [login, { isLoading, error, data }] = useLoginMutation();
+  const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
+  const [refresh] = useRefreshMutation();
 
   const handleLogin = async () => {
+    const formData = {
+      email,
+      password,
+    };
     try {
-      const response = await logIn({ email, password }).unwrap();
-      if (response && response.token) {
-        // Save the JWT token to cookies
-        Cookies.set("Token", response.token, { expires: 7 });
-         sessionStorage.setItem("Token", response.token);
-
-        console.log("Login successful and JWT token saved to cookies!");
-      }
-      navigate("/");
-      window.location.reload();
+      const res = await login(formData).unwrap();
+      return res.data.user;
     } catch (err) {
-      console.error("Login failed:", err);
-      return null;
+      throw err;
     }
   };
-  console.log(data);
+
+  const handleLogout = async () => {
+    await logout().unwrap();
+  };
+
+  const refreshToken = async () => {
+    try {
+      await refresh().unwrap();
+    } catch (error) {
+      console.error("Refresh failed", error);
+    }
+  };
+
   return {
+    //Login
     email,
     setEmail,
     password,
@@ -36,6 +48,13 @@ const useLogin = () => {
     isLoading,
     error,
     data,
+
+    //Logout
+    handleLogout,
+    isLoggingOut,
+
+    //Refresh token
+    refreshToken,
   };
 };
 

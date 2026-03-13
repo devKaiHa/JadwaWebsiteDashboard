@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import Tabs from "../../../../components/Global/Tabs";
@@ -13,8 +12,6 @@ const AddBlog = () => {
 
     category,
     setCategory,
-    published,
-    setPublished,
 
     tagsEN,
     setTagsEN,
@@ -27,10 +24,8 @@ const AddBlog = () => {
     onCoverChange,
     thumbnailPreviews,
     handleThumbnailsChange,
-    onThumbnailsChange,
 
     handleSave,
-    resetForm,
     isLoading,
     error,
   } = AddBlogHook();
@@ -50,7 +45,7 @@ const AddBlog = () => {
           setTagsAR={setTagsAR}
           tagsTR={tagsTR}
           setTagsTR={setTagsTR}
-          coverPreview={coverPreview} 
+          coverPreview={coverPreview}
           onCoverChange={onCoverChange}
           thumbnailPreviews={thumbnailPreviews}
           onThumbnailsChange={handleThumbnailsChange}

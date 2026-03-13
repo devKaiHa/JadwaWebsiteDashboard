@@ -1,4 +1,3 @@
-import React from "react";
 import useUpdateCategoryForm from "../hooks/useUpdateCategoryForm";
 
 const UpdateCategoryModal = ({ isOpen, onClose, initialCategory }) => {

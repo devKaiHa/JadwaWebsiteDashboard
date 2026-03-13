@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { KeenIcon } from "@/components";
-import { useLayout } from "@/providers";
 import useLogin from "./useLogin";
-import { Alert } from "@/components"; // Assuming Alert is your custom alert component
+import { Alert } from "@/components";
 
 const Login = () => {
   const {
@@ -17,7 +15,6 @@ const Login = () => {
     error,
   } = useLogin();
   const [showPassword, setShowPassword] = useState(false);
-  const { currentLayout } = useLayout();
 
   const togglePassword = (event) => {
     event.preventDefault();
@@ -45,7 +42,7 @@ const Login = () => {
         <div className="flex items-center gap-2">
           <span className="border-t border-gray-200 w-full"></span>
           <span className="text-2xs text-gray-500 font-medium uppercase">
-            Smart WebSite
+            Jadwa Website
           </span>
           <span className="border-t border-gray-200 w-full"></span>
         </div>
@@ -70,16 +67,6 @@ const Login = () => {
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between gap-1">
             <label className="form-label text-gray-900">Password</label>
-            {/* <Link
-              to={
-                currentLayout?.name === "auth-branded"
-                  ? "/auth/reset-password"
-                  : "/auth/classic/reset-password"
-              }
-              className="text-2sm link shrink-0"
-            >
-              Forgot Password?
-            </Link> */}
           </div>
           <label className="input">
             <input
@@ -101,11 +88,6 @@ const Login = () => {
             </button>
           </label>
         </div>
-
-        <label className="checkbox-group">
-          <input className="checkbox checkbox-sm" type="checkbox" />
-          <span className="checkbox-label">Remember me</span>
-        </label>
 
         <button
           type="submit"

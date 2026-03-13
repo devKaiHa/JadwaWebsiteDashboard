@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import AddCategoryModal from "./AddCategoryModal";
 import UpdateCategoryModal from "./UpdateCategoryModal";
 import { useGetAllBlogCategoriesQuery } from "../../../../rtk/Blog/BlogCateoryApi";
+
 const AllCateogryBlogs = () => {
   const {
     data: categories,
@@ -14,7 +15,6 @@ const AllCateogryBlogs = () => {
     error,
     refetch: refetchCategories,
   } = useGetAllBlogCategoriesQuery();
-  // console.log("categories", categories);
 
   const [openAddCategory, setOpenAddCategory] = useState(false);
   const [openUpdateCategory, setOpenUpdateCategory] = useState(false);

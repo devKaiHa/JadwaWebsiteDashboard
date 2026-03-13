@@ -131,7 +131,7 @@ export const useCompanyDetails = () => {
   const removeSlideById = async (companyIndex, slideIndex) => {
     const slide = companies[companyIndex].slides[slideIndex];
     const existsInOriginal = originalCompanies.some((c) =>
-      c.slides.some((s) => s._id === slide._id)
+      c.slides.some((s) => s._id === slide._id),
     );
 
     if (existsInOriginal) {
@@ -146,7 +146,7 @@ export const useCompanyDetails = () => {
     setCompanies((prev) => {
       const updated = [...prev];
       updated[companyIndex].slides = updated[companyIndex].slides.filter(
-        (_, idx) => idx !== slideIndex
+        (_, idx) => idx !== slideIndex,
       );
       return updated;
     });
@@ -159,7 +159,7 @@ export const useCompanyDetails = () => {
 
     for (let slide of company.slides) {
       const existsInOriginal = originalCompanies.some((c) =>
-        c.slides.some((s) => s._id === slide._id)
+        c.slides.some((s) => s._id === slide._id),
       );
       if (existsInOriginal) {
         try {
@@ -241,7 +241,7 @@ export const useCompanyDetails = () => {
             ? originalCompanies.some(
                 (originalCompany) =>
                   originalCompany.nameId === company.nameId &&
-                  originalCompany.slides.some((s) => s._id === slide._id)
+                  originalCompany.slides.some((s) => s._id === slide._id),
               )
             : false;
 
@@ -256,7 +256,7 @@ export const useCompanyDetails = () => {
                   ? companyIndex
                   : companies.findIndex(
                       (c) =>
-                        JSON.stringify(c.name) === JSON.stringify(company.name)
+                        JSON.stringify(c.name) === JSON.stringify(company.name),
                     );
               if (actualIndex !== -1) {
                 updated[actualIndex].slides[j]._id = res.data._id;

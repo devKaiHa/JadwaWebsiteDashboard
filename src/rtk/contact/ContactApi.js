@@ -1,37 +1,49 @@
-// rtk/Contact/contactApi.js
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import baseURL, { ContactusEndPoint } from "../../Api/GlobalData";
-import Cookies from "js-cookie";
+import { ContactEP } from "../../Api/GlobalData";
+import { baseApi } from "../baseApi";
 
-const jwt = Cookies.get("Token");
-
-export const ContactApi = createApi({
-  reducerPath: "contact",
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseURL,
-    prepareHeaders: (headers) => {
-      if (jwt) {
-        headers.set("Authorization", `Bearer ${jwt}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ["contact"],
+export const contactsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getOneContact: builder.query({
-      query: () => `${ContactusEndPoint}/one`,
+    getContacts: builder.query({
+      query: ({ q, type, status } = {}) => {
+        const params = new URLSearchParams();
+
+        if (q) params.append("q", q);
+        if (type) params.append("type", type);
+        if (status) params.append("status", status);
+
+        const queryString = params.toString();
+        return queryString ? `${ContactEP}?${queryString}` : ContactEP;
+      },
+      providesTags: ["contact"],
+    }),
+
+    getContactById: builder.query({
+      query: (id) => `${ContactEP}/${id}`,
       providesTags: ["contact"],
     }),
 
     updateContact: builder.mutation({
-      query: (data) => ({
-        url: `${ContactusEndPoint}/one`,
+      query: ({ id, data }) => ({
+        url: `${ContactEP}/${id}`,
         method: "PUT",
         body: data,
+      }),
+      invalidatesTags: ["contact"],
+    }),
+
+    deleteContact: builder.mutation({
+      query: (id) => ({
+        url: `${ContactEP}/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["contact"],
     }),
   }),
 });
 
-export const { useGetOneContactQuery, useUpdateContactMutation } = ContactApi;
+export const {
+  useGetContactsQuery,
+  useGetContactByIdQuery,
+  useUpdateContactMutation,
+  useDeleteContactMutation,
+} = contactsApi;

@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import { useAuthContext } from "@/auth";
 import { useLanguage } from "@/i18n";
 import { toAbsoluteUrl } from "@/utils";
 import { DropdownUserLanguages } from "./DropdownUserLanguages";

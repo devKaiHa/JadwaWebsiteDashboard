@@ -1,11 +1,11 @@
-import React, { forwardRef, useRef } from "react";
-import { toAbsoluteUrl } from "@/utils";
-import { useAuthContext } from "@/auth";
+import { forwardRef, useRef } from "react";
+import person from "../../../assets/person.png";
 import { KeenIcon, Menu, MenuItem, MenuToggle } from "@/components";
 import { DropdownUser } from "@/partials/dropdowns/user";
 import { DropdownNotifications } from "@/partials/dropdowns/notifications";
 import { useLanguage } from "@/i18n";
 import useLogout from "../../../modules/auth/sign-out/useLogout";
+
 const SidebarFooter = forwardRef((props, ref) => {
   const itemNotificationsRef = useRef(null);
   const itemUserRef = useRef(null);
@@ -37,7 +37,7 @@ const SidebarFooter = forwardRef((props, ref) => {
           <MenuToggle className="btn btn-icon rounded-full">
             <img
               className="size-8 rounded-full justify-center border border-gray-500 shrink-0"
-              src={toAbsoluteUrl("/media/avatars/gray/5.png")}
+              src={person}
               alt=""
             />
           </MenuToggle>
@@ -97,4 +97,5 @@ const SidebarFooter = forwardRef((props, ref) => {
     </div>
   );
 });
+
 export { SidebarFooter };

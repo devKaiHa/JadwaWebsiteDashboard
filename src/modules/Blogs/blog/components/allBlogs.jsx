@@ -29,8 +29,8 @@ const AllEmployees = () => {
     page: currentPage,
     limit: perPage,
   });
-  console.log(data);
-    const [deleteBlog] = useDeleteBlogMutation();
+
+  const [deleteBlog] = useDeleteBlogMutation();
   const [updateBlog] = useUpdateBlogMutation();
 
   if (isLoading) return <LoadingCard />;
@@ -49,7 +49,7 @@ const AllEmployees = () => {
     try {
       await updateBlog({ id, data: { published: !currentPublished } }).unwrap();
       toast.success(
-        `Blog ${!currentPublished ? "published" : "unpublished"} successfully`
+        `Blog ${!currentPublished ? "published" : "unpublished"} successfully`,
       );
     } catch (err) {
       console.log("error", err);

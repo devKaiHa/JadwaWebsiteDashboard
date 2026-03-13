@@ -132,7 +132,7 @@ const AboutServicesUpdate = () => {
                   "content",
                   lang,
                   e.target.value.split("\n"),
-                  "text"
+                  "text",
                 )
               }
             />

@@ -19,7 +19,6 @@ const UpdateBlog = () => {
   const { id } = useParams();
   const { data: BlogData, isLoading, error } = useGetOneBlogQuery(id);
   const [updateBlogs, { isLoading: isUpdating }] = useUpdateBlogMutation();
-  console.log(BlogData);
 
   // State for general info
   const [category, setCategory] = useState("");
@@ -46,7 +45,7 @@ const UpdateBlog = () => {
       const contentType = response.headers.get("Content-Type");
       if (!contentType || !contentType.startsWith("image/")) {
         throw new Error(
-          `URL does not point to an image. Content-Type: ${contentType}`
+          `URL does not point to an image. Content-Type: ${contentType}`,
         );
       }
 
@@ -78,10 +77,10 @@ const UpdateBlog = () => {
         if (data.thumbnailImage?.length) {
           const thumbnailFiles = await Promise.all(
             data.thumbnailImage.map((url, index) =>
-              urlToFile(url, `thumbnail_${index}`)
-            )
+              urlToFile(url, `thumbnail_${index}`),
+            ),
           );
-          setThumbnailPreviews(thumbnailFiles.filter(Boolean)); 
+          setThumbnailPreviews(thumbnailFiles.filter(Boolean));
         } else {
           setThumbnailPreviews([]);
         }

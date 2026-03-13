@@ -188,7 +188,7 @@ const usePostCompany = () => {
     langs.forEach((lang) => {
       formData.append(
         `introduction[title][${lang}]`,
-        company.introduction.title[lang]
+        company.introduction.title[lang],
       );
     });
     company.introduction.array.forEach((item, idx) => {

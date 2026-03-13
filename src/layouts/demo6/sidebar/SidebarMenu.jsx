@@ -1,4 +1,4 @@
-import { SidebarMenuPrimary, SidebarMenuSecondary } from "./";
+import { SidebarMenuPrimary } from "./";
 const SidebarMenu = ({ height = 0 }) => {
   return (
     <div className="flex items-stretch grow shrink-0 justify-center my-5">
@@ -15,7 +15,6 @@ const SidebarMenu = ({ height = 0 }) => {
         <SidebarMenuPrimary type="modules" />
         <div className="border-b border-gray-300 mt-4 mb-1 mx-3.5"></div>
         <SidebarMenuPrimary type="settings" />
-        {/* <SidebarMenuSecondary /> */}
       </div>
     </div>
   );

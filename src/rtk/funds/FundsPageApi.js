@@ -1,33 +1,20 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import baseURL, { fundsEndPoint } from "../../Api/GlobalData";
+import { FundsEP } from "../../Api/GlobalData";
+import { baseApi } from "../baseApi";
 
-import Cookies from "js-cookie";
-
-// import Cookies from "js-cookie";
-const jwt = Cookies.get("Token");
-export const FundsPageApi = createApi({
-  reducerPath: "FundsPageApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseURL,
-    prepareHeaders: (headers) => {
-      if (jwt) headers.set("Authorization", `Bearer ${jwt}`);
-      return headers;
-    },
-  }),
-  tagTypes: ["FundsPage"],
+export const FundsPageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllFunds: builder.query({
-      query: (query) => `${fundsEndPoint}?${query}`,
+      query: (query) => `${FundsEP}?${query}`,
       providesTags: ["FundsPage"],
     }),
     getOneFund: builder.query({
-      query: (id) => `${fundsEndPoint}/${id}`,
+      query: (id) => `${FundsEP}/${id}`,
       providesTags: ["FundsPage"],
     }),
 
     postFund: builder.mutation({
       query: (formData) => ({
-        url: fundsEndPoint,
+        url: FundsEP,
         method: "POST",
         body: formData,
       }),
@@ -36,7 +23,7 @@ export const FundsPageApi = createApi({
 
     updateFund: builder.mutation({
       query: ({ id, formData }) => ({
-        url: `${fundsEndPoint}/${id}`,
+        url: `${FundsEP}/${id}`,
         method: "PUT",
         body: formData,
       }),
@@ -45,7 +32,7 @@ export const FundsPageApi = createApi({
 
     deleteFund: builder.mutation({
       query: (id) => ({
-        url: `${fundsEndPoint}/${id}`,
+        url: `${FundsEP}/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["FundsPage"],

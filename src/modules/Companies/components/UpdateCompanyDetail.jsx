@@ -97,7 +97,7 @@ export default function UpdateCompanyDetail() {
                       />
                     )}
                   </div>
-                )
+                ),
               )}
             </div>
 
@@ -302,7 +302,7 @@ export default function UpdateCompanyDetail() {
                       "introduction",
                       "title",
                       lang,
-                      e.target.value
+                      e.target.value,
                     )
                   }
                 />

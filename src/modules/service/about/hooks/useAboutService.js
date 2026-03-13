@@ -92,7 +92,7 @@ export const useAboutServicesUpdate = () => {
       for (const lang of ["ar", "en", "tr"]) {
         if (!data.content[section][lang]) {
           toast.error(
-            `Please fill the ${section} field in ${lang.toUpperCase()}.`
+            `Please fill the ${section} field in ${lang.toUpperCase()}.`,
           );
           return false;
         }
@@ -106,7 +106,7 @@ export const useAboutServicesUpdate = () => {
         data.content.text[lang].some((line) => !line.trim())
       ) {
         toast.error(
-          `Please fill the paragraph content in ${lang.toUpperCase()}.`
+          `Please fill the paragraph content in ${lang.toUpperCase()}.`,
         );
         return false;
       }

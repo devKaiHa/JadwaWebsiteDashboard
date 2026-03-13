@@ -29,9 +29,9 @@ const UseFundUpdate = () => {
     data: fundData,
     isLoading: isFetching,
     isError,
-  } = useGetOneFundQuery(id);  
+  } = useGetOneFundQuery(id);
   console.log(fundData);
-  
+
   const [updateFund, { isLoading, isSuccess, error }] = useUpdateFundMutation();
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const UseFundUpdate = () => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0)
       toast.error(
-        "⚠️ All translations (EN, AR, TR) must be filled before saving!"
+        "⚠️ All translations (EN, AR, TR) must be filled before saving!",
       );
 
     return Object.keys(newErrors).length === 0;
@@ -101,7 +101,7 @@ const UseFundUpdate = () => {
     } catch (err) {
       console.error(err);
       setServerError(
-        err?.data?.message || "An error occurred while updating the fund."
+        err?.data?.message || "An error occurred while updating the fund.",
       );
     }
   };

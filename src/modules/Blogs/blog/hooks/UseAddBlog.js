@@ -50,7 +50,7 @@ const AddBlogHook = () => {
     const file = selectedAvatar?.[0]?.file;
     if (file) {
       setCoverImage(file);
-      setCoverPreview(URL.createObjectURL(file)); 
+      setCoverPreview(URL.createObjectURL(file));
     } else {
       setCoverImage(null);
       setCoverPreview(null);
@@ -69,7 +69,7 @@ const AddBlogHook = () => {
     setThumbnails(newThumbnails);
     setThumbnailPreviews(newThumbnails.map((f) => URL.createObjectURL(f)));
   };
-console.log(thumbnailPreviews);
+  console.log(thumbnailPreviews);
 
   // Update blogData for a specific language
   const handleLangChange = (lang, data) => {
@@ -106,11 +106,11 @@ console.log(thumbnailPreviews);
       formData.append("published", published ? "true" : "false");
 
       if (coverImage) formData.append("photo", coverImage);
-     if (thumbnailPreviews?.length) {
-      Array.from(thumbnailPreviews).forEach((file) => {
-        if (file instanceof File) formData.append("thumbnailImage", file);
-      });
-    }
+      if (thumbnailPreviews?.length) {
+        Array.from(thumbnailPreviews).forEach((file) => {
+          if (file instanceof File) formData.append("thumbnailImage", file);
+        });
+      }
       const res = await postBlog(formData).unwrap();
       console.log(res);
 

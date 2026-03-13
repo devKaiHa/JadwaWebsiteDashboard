@@ -63,7 +63,7 @@ export default function AddCompany() {
                       />
                     )}
                   </div>
-                )
+                ),
               )}
             </div>
 
@@ -268,7 +268,7 @@ export default function AddCompany() {
                       "introduction",
                       "title",
                       lang,
-                      e.target.value
+                      e.target.value,
                     )
                   }
                 />

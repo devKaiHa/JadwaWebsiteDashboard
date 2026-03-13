@@ -6,7 +6,7 @@ import {
 import { useParams } from "react-router";
 
 export const useUpdateBlog = () => {
-    const { id } = useParams();
+  const { id } = useParams();
   const [titleEN, setTitleEN] = useState("");
   const [titleAR, setTitleAR] = useState("");
   const [descriptionEN, setDescriptionEN] = useState("");
@@ -18,7 +18,6 @@ export const useUpdateBlog = () => {
 
   // Fetch blog data only if modal is shown and id exists
   const { data, isLoading: isFetching } = useGetOneBlogQuery(id);
-console.log(id);
 
   const [updateBlog, { isLoading, isSuccess, error }] = useUpdateBlogMutation();
 
@@ -71,7 +70,9 @@ console.log(id);
       descriptionEN.trim().length < 10 ||
       descriptionAR.trim().length < 10
     ) {
-      alert("Please fill all required fields with valid data (min 10 chars for descriptions).");
+      alert(
+        "Please fill all required fields with valid data (min 10 chars for descriptions).",
+      );
       return;
     }
 

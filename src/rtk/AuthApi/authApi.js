@@ -1,21 +1,56 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import baseURL, { LogInEndPoint } from "../../Api/GlobalData"; // تأكد من المسار الصحيح
+import baseURL, {
+  LoginEP,
+  LogoutEP,
+  RefreshEP,
+  SeedAdminEP,
+} from "../../Api/GlobalData";
 
-export const AuthApi = createApi({
+export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: baseURL,
+    credentials: "include",
   }),
   endpoints: (builder) => ({
-    // ✅ Login Mutation
     login: builder.mutation({
-      query: (formData) => ({
-        url: LogInEndPoint,
+      query: (data) => ({
+        url: LoginEP,
         method: "POST",
-        body: formData,
+        body: data,
+      }),
+    }),
+
+    refresh: builder.mutation({
+      query: () => ({
+        url: RefreshEP,
+        method: "POST",
+      }),
+    }),
+
+    logout: builder.mutation({
+      query: () => ({
+        url: LogoutEP,
+        method: "POST",
+      }),
+    }),
+
+    seedAdmin: builder.mutation({
+      query: ({ data, seedKey }) => ({
+        url: SeedAdminEP,
+        method: "POST",
+        headers: {
+          "x-seed-key": seedKey,
+        },
+        body: data,
       }),
     }),
   }),
 });
 
-export const { useLoginMutation } = AuthApi;
+export const {
+  useLoginMutation,
+  useRefreshMutation,
+  useLogoutMutation,
+  useSeedAdminMutation,
+} = authApi;
