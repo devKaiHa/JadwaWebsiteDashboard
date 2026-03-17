@@ -47,3 +47,11 @@ export function deepMerge(obj1, obj2) {
 export function uniqueID() {
   return (Date.now() + Math.floor(Math.random() * 1000)).toString();
 }
+
+export const htmlToPlainText = (html) => {
+  if (!html) return "";
+
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  return temp.textContent || temp.innerText || "";
+};

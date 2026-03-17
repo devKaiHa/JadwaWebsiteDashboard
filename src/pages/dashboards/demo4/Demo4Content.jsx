@@ -1,10 +1,14 @@
 import { Fragment } from "react";
-import { BlockList } from "@/pages/account/security/privacy-settings";
 import { MiscCreateTeam } from "@/partials/misc";
-import { toAbsoluteUrl } from "@/utils";
-import { Highlights } from "../../public-profile/profiles/company/blocks/Highlights";
-import { Teams } from "../../public-profile/teams/blocks/Teams";
+import jadwaLightEn from "../../../assets/jadwa-en-light.png";
+import jadwaDarkEn from "../../../assets/jadwa-en-dark.png";
+import jadwaLightAr from "../../../assets/jadwa-ar-light.png";
+import jadwaDarkAr from "../../../assets/jadwa-ar-dark.png";
+import { useLanguage } from "@/i18n";
+
 const Demo4Content = () => {
+  const { currentLanguage: curLng } = useLanguage();
+
   return (
     <div className="grid gap-5 lg:gap-7.5">
       <div className="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
@@ -13,48 +17,24 @@ const Demo4Content = () => {
             image={
               <Fragment>
                 <img
-                  src={toAbsoluteUrl("/media/illustrations/32.svg")}
-                  className="dark:hidden max-h-[180px]"
+                  src={curLng.code === "ar" ? jadwaDarkAr : jadwaDarkEn}
+                  className="dark:hidden max-h-[120px]"
                   alt=""
                 />
                 <img
-                  src={toAbsoluteUrl("/media/illustrations/32-dark.svg")}
-                  className="light:hidden max-h-[180px]"
+                  src={curLng.code === "ar" ? jadwaLightAr : jadwaLightEn}
+                  className="light:hidden max-h-[120px]"
                   alt=""
                 />
               </Fragment>
             }
             className="h-full"
-            title="Swift Setup for New Teams"
+            title="Welcome to Jadwa Invest dashboard"
             subTitle={
               <Fragment>
-                Enhance team formation and management with easy-to-use tools for
-                communication,
-                <br />
-                task organization, and progress tracking, all in one place.
+                Manage the Jadwa Website content easily with this dashboard
               </Fragment>
             }
-            engage={{
-              path: "/public-profile/teams",
-              label: "Create Team",
-              btnColor: "btn-primary",
-            }}
-          />
-        </div>
-
-        <div className="lg:col-span-1">
-          <Highlights />
-        </div>
-      </div>
-
-      <div className="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
-        <div className="lg:col-span-2">
-          <Teams />
-        </div>
-        <div className="lg:col-span-1">
-          <BlockList
-            className="h-full"
-            text="Users on the block list are unable to send chat requests or messages to you anymore, ever, or again"
           />
         </div>
       </div>

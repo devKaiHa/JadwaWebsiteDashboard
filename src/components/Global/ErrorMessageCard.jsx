@@ -1,7 +1,10 @@
-import React from "react";
 import { KeenIcon } from "../keenicons";
 
-const ErrorMessageCard = ({ message = "Something went wrong.", onRetry }) => {
+const ErrorMessageCard = ({
+  message = "Something went wrong.",
+  onRetry,
+  btnTxt = "Retry",
+}) => {
   return (
     <div className="flex items-center justify-center min-h-[300px] w-full px-4">
       <div className="badge badge-outline badge-danger text-sm font-mono rounded-lg px-4 py-3 flex items-center gap-2 max-w-md w-full shadow-md">
@@ -13,7 +16,7 @@ const ErrorMessageCard = ({ message = "Something went wrong.", onRetry }) => {
             onClick={onRetry}
             className=" border border-red-400 px-2 py-1 rounded"
           >
-            Retry
+            {btnTxt}
           </button>
         )}
       </div>

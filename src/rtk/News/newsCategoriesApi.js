@@ -4,13 +4,14 @@ import { baseApi } from "../baseApi";
 export const newsCategoriesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getNewsCategories: builder.query({
-      query: ({ q, active } = {}) => {
+      query: ({ q, page, limit, isActive } = {}) => {
         const params = new URLSearchParams();
 
         if (q) params.append("q", q);
-
-        if (active !== undefined && active !== null && active !== "") {
-          params.append("active", String(active));
+        if (page) params.append("page", String(page));
+        if (limit) params.append("limit", String(limit));
+        if (isActive !== undefined && isActive !== null && isActive !== "") {
+          params.append("isActive", String(isActive));
         }
 
         const queryString = params.toString();

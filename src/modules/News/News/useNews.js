@@ -33,30 +33,6 @@ export const useNewsById = (id) => {
 };
 
 export const useCreateNews = () => {
-  /*
-  {
-  title: {
-    ar: "توسع الشركة في 2026",
-    en: "Company Expands in 2026",
-  },
-  slug: "company-expands-2026",
-  excerpt: {
-    ar: "ملخص الخبر",
-    en: "News excerpt",
-  },
-  content: {
-    ar: "المحتوى الكامل للخبر",
-    en: "Full news content",
-  },
-  image: "",
-  category: "67ce1234abcd5678ef901234",
-  tags: ["economy", "company"],
-  author: "Admin",
-  readTime: 4,
-  isPublished: true,
-  order: 0,
-}
-   */
   const [createNews, { isLoading, error, data }] = useCreateNewsMutation();
 
   const handleCreateNews = async (payload) => {

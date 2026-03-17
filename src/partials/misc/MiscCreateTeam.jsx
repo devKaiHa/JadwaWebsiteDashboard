@@ -1,13 +1,8 @@
-import clsx from 'clsx';
-import { Link } from 'react-router-dom';
-const MiscCreateTeam = ({
-  className,
-  image,
-  title,
-  subTitle,
-  engage
-}) => {
-  return <div className={clsx('card', className && className)}>
+import clsx from "clsx";
+import { Link } from "react-router-dom";
+const MiscCreateTeam = ({ className, image, title, subTitle, engage }) => {
+  return (
+    <div className={clsx("card", className && className)}>
       <div className="card-body flex flex-col place-content-center gap-5">
         <div className="flex justify-center">{image}</div>
 
@@ -17,13 +12,16 @@ const MiscCreateTeam = ({
             <p className="text-sm font-medium text-gray-700">{subTitle}</p>
           </div>
 
-          <div className="flex justify-center">
-            <Link to={`${engage.path}`} className={`btn ${engage.btnColor}`}>
-              {engage.label}
-            </Link>
-          </div>
+          {engage && (
+            <div className="flex justify-center">
+              <Link to={`${engage.path}`} className={`btn ${engage.btnColor}`}>
+                {engage.label}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 export { MiscCreateTeam };

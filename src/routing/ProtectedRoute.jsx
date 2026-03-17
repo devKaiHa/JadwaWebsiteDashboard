@@ -1,13 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useGetMeQuery } from "../rtk/UsersApi/usersApi";
 
-const checkToken = () => {
-  const token = sessionStorage.getItem("Token");
-  return token ? true: false;
-};
+const ProtectedRoute = ({ redirectTo = "/login" }) => {
+  const { data, isLoading, isError } = useGetMeQuery();
 
-const ProtectedRoute = ({ redirectTo }) => {
-  if (!checkToken()) {
-    return <Navigate to={redirectTo} />;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError || !data) {
+    return <Navigate to={redirectTo} replace />;
   }
 
   return <Outlet />;

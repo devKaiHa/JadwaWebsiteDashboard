@@ -11,6 +11,7 @@ export const baseApi = createApi({
     "contact",
     "Funds",
     "Jobs",
+    "JobApplications",
     "News",
     "NewsCategories",
     "Newsletters",

@@ -34,17 +34,6 @@ export const useNewsCategoryById = (id) => {
 };
 
 export const useCreateNewsCategory = () => {
-  /*
-  {
-  name: {
-    ar: "أخبار السوق",
-    en: "Market News",
-  },
-  slug: "market-news",
-  isActive: true,
-  order: 0,
-}
-   */
   const [createNewsCategory, { isLoading, error, data }] =
     useCreateNewsCategoryMutation();
 

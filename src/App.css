@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+.ck-editor-wrapper .ck-editor__editable {
+  min-height: 180px;
+}
+
+.ck-editor-wrapper .ck.ck-editor__main > .ck-editor__editable {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.ck-editor-wrapper .ck.ck-toolbar {
+  border-radius: 0.5rem 0.5rem 0 0;
+}

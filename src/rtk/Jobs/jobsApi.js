@@ -3,18 +3,14 @@ import { baseApi } from "../baseApi";
 
 export const jobsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Jobs
     getJobs: builder.query({
-      query: ({ q, active, published } = {}) => {
+      query: ({ q, status } = {}) => {
         const params = new URLSearchParams();
 
         if (q) params.append("q", q);
-
-        if (active !== undefined && active !== null && active !== "") {
-          params.append("active", String(active));
-        }
-
-        if (published !== undefined && published !== null && published !== "") {
-          params.append("published", String(published));
+        if (status !== undefined && status !== null && status !== "") {
+          params.append("status", String(status));
         }
 
         const queryString = params.toString();
@@ -54,6 +50,7 @@ export const jobsApi = baseApi.injectEndpoints({
       invalidatesTags: ["Jobs"],
     }),
 
+    // Applications
     getApplications: builder.query({
       query: ({ job, status, q } = {}) => {
         const params = new URLSearchParams();
@@ -67,12 +64,12 @@ export const jobsApi = baseApi.injectEndpoints({
           ? `${JobEP}/applications/list?${queryString}`
           : `${JobEP}/applications/list`;
       },
-      providesTags: ["Jobs"],
+      providesTags: ["JobApplications"],
     }),
 
     getApplicationById: builder.query({
       query: (id) => `${JobEP}/applications/${id}`,
-      providesTags: ["Jobs"],
+      providesTags: ["JobApplications"],
     }),
 
     updateApplication: builder.mutation({
@@ -81,7 +78,7 @@ export const jobsApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Jobs"],
+      invalidatesTags: ["JobApplications"],
     }),
 
     deleteApplication: builder.mutation({
@@ -89,7 +86,7 @@ export const jobsApi = baseApi.injectEndpoints({
         url: `${JobEP}/applications/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Jobs"],
+      invalidatesTags: ["JobApplications"],
     }),
   }),
 });

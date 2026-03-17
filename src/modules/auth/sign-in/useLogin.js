@@ -4,8 +4,10 @@ import {
   useLogoutMutation,
   useRefreshMutation,
 } from "../../../rtk/AuthApi/authApi";
+import { useNavigate } from "react-router";
 
 const useLogin = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,13 +16,14 @@ const useLogin = () => {
   const [refresh] = useRefreshMutation();
 
   const handleLogin = async () => {
-    const formData = {
-      email,
-      password,
-    };
+    const formData = { email, password };
+
     try {
       const res = await login(formData).unwrap();
-      return res.data.user;
+      if (res.statusCode === 200) {
+        navigate("/");
+        localStorage.setItem("_u_7721", JSON.stringify(res.data.user));
+      }
     } catch (err) {
       throw err;
     }

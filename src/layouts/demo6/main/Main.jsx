@@ -12,14 +12,13 @@ import {
 } from "../";
 import { useMenus } from "@/providers";
 import { useResponsive } from "@/hooks";
-import { Link } from "react-router-dom";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { addDays, format } from "date-fns";
+import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { KeenIcon } from "@/components/keenicons";
 
@@ -29,10 +28,9 @@ const Main = () => {
   const { getMenuConfig } = useMenus();
   const menuConfig = getMenuConfig("primary");
   const menuItem = useMenuCurrentItem(pathname, menuConfig);
-  const [date, setDate] = useState({
-    from: new Date(2025, 0, 20),
-    to: addDays(new Date(2025, 0, 20), 20),
-  });
+
+  const today = new Date();
+  const [date] = useState(today);
 
   return (
     <Fragment>
@@ -52,13 +50,6 @@ const Main = () => {
                   <ToolbarHeading />
 
                   <ToolbarActions>
-                    <Link
-                      to={"/account/home/get-started"}
-                      className="btn btn-sm btn-light"
-                    >
-                      <KeenIcon icon="exit-down !text-base" />
-                      Export
-                    </Link>
                     <Popover>
                       <PopoverTrigger asChild>
                         <button
@@ -69,33 +60,21 @@ const Main = () => {
                           )}
                         >
                           <KeenIcon icon="calendar" className="me-0.5" />
-                          {date?.from ? (
-                            date.to ? (
-                              <>
-                                {format(date.from, "LLL dd, y")} -{" "}
-                                {format(date.to, "LLL dd, y")}
-                              </>
-                            ) : (
-                              format(date.from, "LLL dd, y")
-                            )
+                          {date ? (
+                            format(date, "LLL dd, y")
                           ) : (
-                            <span>Pick a date range</span>
+                            <span>Today</span>
                           )}
                         </button>
                       </PopoverTrigger>
+
                       <PopoverContent className="w-auto p-0" align="end">
-                        <Calendar
-                          initialFocus
-                          mode="range"
-                          defaultMonth={date?.from}
-                          selected={date}
-                          onSelect={setDate}
-                          numberOfMonths={2}
-                        />
+                        <Calendar mode="single" selected={date} month={today} />
                       </PopoverContent>
                     </Popover>
                   </ToolbarActions>
                 </Toolbar>
+
                 <Outlet />
               </main>
 
